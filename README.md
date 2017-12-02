@@ -9,21 +9,20 @@ Taxman
 Inputs
 ---
 
-- [ ] Tax regime
-  - [ ] 2017
-  - [ ] 2018 (House)
-  - [ ] 2018 (Senate)
-- [ ] Filing status
-  - [ ] Joint, separate, single, head of household
-  - [ ] Number of dependents
-- [ ] Income
-  - [ ] Ordinary income
-  - [ ] Adjustments to income
-  - [ ] Long-term capital gains
-- [ ] Deductions
-  - [ ] Standard
-  - [ ] Itemized
-- [ ] Exemptions
+- [x] Tax regime
+  - [x] 2017
+  - [x] 2018 (House)
+  - [x] 2018 (Senate)
+- [x] Filing status
+  - [x] Joint, separate, single, head of household
+  - [x] Number of dependents
+- [x] Income
+  - [x] Ordinary income less adjustments
+  - [x] Long-term capital gains
+- [x] Deductions
+  - [x] Standard
+  - [x] Itemized
+- [x] Exemptions
 
 Outputs
 ---
