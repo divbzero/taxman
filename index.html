@@ -430,7 +430,18 @@
         }
         var attributes = attrs && attrs[element.id] || {};
         for (var name in attributes) {
-          element.setAttribute(name, attributes[name]);
+          switch (attributes[name]) {
+            case true:
+              element.setAttribute(name, '');
+              break;
+            case false:
+            case null:
+            case undefined:
+              element.removeAttribute(name);
+              break;
+            default:
+              element.setAttribute(name, attributes[name]);
+          }
         }
       }
     }
