@@ -27,6 +27,6 @@ Inputs
 Outputs
 ---
 
-- [ ] Taxable income
-- [ ] Tax
+- [x] Taxable income
+- [x] Tax
 

@@ -390,5 +390,106 @@
         },
       },
     };
+
+    function parseForm(form) {
+      var values = {};
+      for (var element, i = 0; element = form.elements[i]; ++i) {
+        switch (element.tagName) {
+          case 'INPUT':
+            break;
+          default:
+            continue;
+        }
+        switch (element.type) {
+          case 'checkbox':
+          case 'radio':
+            if (element.checked) values[element.name] = element.value;
+            break;
+          default:
+            values[element.name] = element.value;
+        }
+      }
+      return values;
+    }
+
+    function updateForm(form, values, attrs) {
+      for (var element, i = 0; element = form.elements[i]; ++i) {
+        switch (element.tagName) {
+          case 'INPUT':
+            break;
+          default:
+            continue;
+        }
+        switch (element.type) {
+          case 'checkbox':
+          case 'radio':
+            element.checked = values[element.name] == element.value;
+            break;
+          default:
+            element.value = values[element.name];
+        }
+        var attributes = attrs && attrs[element.id] || {};
+        for (var name in attributes) {
+          element.setAttribute(name, attributes[name]);
+        }
+      }
+    }
+
+    function rerender(form) {
+      var values = parseForm(form), attrs = {};
+      calculateTax(values, attrs);
+      formatValues(values);
+      updateForm(form, values, attrs);
+    }
+
+    function calculateTax(values, attrs) {
+      var rate = rates[values['plan']][values['status']];
+
+      attrs = attrs || {};
+      attrs['deduction'] = {'disabled': values['deduction-type'] === 'standard'};
+      attrs['dependents'] = {'min': values['status'] == 'joint' ? 2 : 1};
+
+      // deduction
+      if (values['deduction-type'] === 'standard') {
+        values['deduction'] = rate['deduction'];
+      }
+
+      // exemption
+      if (values['dependents'] < attrs['dependents']['min']) {
+        values['dependents'] = attrs['dependents']['min'];
+      }
+      values['exemption'] = values['dependents'] * rate['exemption'];
+
+      // taxable income
+      values['taxable-income'] = values['income'];
+      values['taxable-income'] -= values['deduction'];
+      values['taxable-income'] -= values['exemption'];
+      values['taxable-income'] = Math.max(0, values['taxable-income']);
+
+      // tax
+      values['tax'] = 0;
+      for (var bracket, i = 0; bracket = rate['income'][i]; ++i) {
+        if (values['taxable-income'] > bracket.max) {
+          values['tax'] += (bracket.max - bracket.min) * bracket.rate;
+        } else {
+          values['tax'] += (values['taxable-income'] - bracket.min) * bracket.rate;
+          break;
+        }
+      }
+    }
+
+    function formatValues(values) {
+      for (var name in values) {
+        if (typeof values[name] === 'number') {
+          values[name] = values[name].toFixed();
+        } else {
+          values[name] = values[name] || '';
+        }
+      }
+    }
+
+    for (var form, i = 0; form = document.forms[i]; ++i) {
+      form.onchange = form.oninput = function(event) { rerender(event.currentTarget) };
+    }
   </script>
 </body>
