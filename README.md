@@ -18,7 +18,7 @@ Inputs
   - [x] Number of dependents
 - [x] Income
   - [x] Ordinary income less adjustments
-  - [x] Long-term capital gains
+  - [ ] Long-term capital gains
 - [x] Deductions
   - [x] Standard
   - [x] Itemized
