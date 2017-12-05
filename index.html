@@ -463,6 +463,9 @@
       // deduction
       if (values['deduction-type'] === 'standard') {
         values['deduction'] = rate['deduction'];
+        attrs['deduction'] = {'type': null, 'min': null, 'step': null, 'disabled': true};
+      } else {
+        attrs['deduction'] = {'type': 'number', 'min': 0, 'step': 1000, 'disabled': false};
       }
 
       // exemption
