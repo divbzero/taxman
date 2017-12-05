@@ -66,6 +66,15 @@
       margin: 0.1em 0;
       vertical-align: top;
     }
+    .input input {
+      background-color: #fff;
+      transition: background-color 0.8s ease-out;
+    }
+    .input:hover input,
+    .input input.highlight {
+      background-color: #dfd;
+      transition: background-color 0.2s ease-out;
+    }
     .input label.unit {
       border: thin solid #ddd;
       border-top-right-radius: 0;
@@ -426,8 +435,12 @@
             element.checked = values[element.name] == element.value;
             break;
           default:
-            element.value = values[element.name];
+            if (values[element.name] != element.value) {
+              element.value = values[element.name];
+              highlightElement(element, 200);
+            }
         }
+
         var attributes = attrs && attrs[element.id] || {};
         for (var name in attributes) {
           switch (attributes[name]) {
@@ -443,6 +456,14 @@
               element.setAttribute(name, attributes[name]);
           }
         }
+      }
+    }
+
+    function highlightElement(element, delay) {
+      var className = element.className;
+      if (className.indexOf(' highlight') < 0) {
+        element.className = className + ' highlight';
+        setTimeout(function () { element.className = className }, delay);
       }
     }
 
