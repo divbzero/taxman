@@ -66,8 +66,12 @@ function highlightElement(element, delay) {
 }
 
 function rerender(form) {
-  var values = parseForm(form), attrs = {};
+  var values = parseForm(form), attrs = {}, incomes = range(0, 400000, 10000), taxesByPlan = {};
   calculateTax(values, attrs);
+  for (var plan in rates) {
+    var valuesForPlan = Object.assign({}, values, {plan: plan});
+    taxesByPlan[plan] = calculateTaxes(valuesForPlan, 'income', incomes);
+  }
   formatValues(values);
   updateForm(form, values, attrs);
 }

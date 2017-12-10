@@ -242,6 +242,37 @@ function calculateTax(values, attrs) {
       break;
     }
   }
+  values['tax'] = Math.round(values['tax']);
+}
+
+function calculateTaxes(values, propname, propvalues) {
+  var taxes = [];
+  values = Object.assign({}, values);
+  for (var i = 0; i < propvalues.length; ++i) {
+    values[propname] = propvalues[i];
+    calculateTax(values);
+    taxes.push(values['tax']);
+  }
+  return taxes;
+}
+
+function range(start, stop, step) {
+  switch (arguments.length) {
+    case 0:
+      start = stop = 0;
+    case 1:
+      stop = start;
+      start = 0;
+    case 2:
+      step = 1
+  }
+  var array = [];
+  if (step > 0) {
+    for (i = start; i < stop; i += step) array.push(i);
+  } else if (step < 0) {
+    for (i = start; i > stop; i += step) array.push(i);
+  }
+  return array;
 }
 
 function formatValues(values) {
