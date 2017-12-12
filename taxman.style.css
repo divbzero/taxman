@@ -1,9 +1,17 @@
 body {
   margin: 0;
-  padding: 0;
+  padding: 1em 0;
+  text-align: center;
   font-family: sans-serif;
   font-size: 14px;
   cursor: default;
+}
+section {
+  display: inline-block;
+  width: 100%;
+  max-width: 40em;
+  text-align: left;
+  vertical-align: top;
 }
 
 fieldset {
@@ -92,5 +100,20 @@ label {
 
 #chart svg {
   height: 600px;
-  opacity: 0.7;
+}
+#chart svg text {
+  fill: #555;
+  font-family: sans-serif;
+}
+#chart svg .tick text {
+  font-size: 72%;
+}
+#chart svg .nv-axis path {
+  stroke: #e5e5e5;
+}
+#chart svg text.nv-axislabel {
+  font-size: 84%;
+  font-weight: bold;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
 }

@@ -66,11 +66,12 @@ function updateChart(chart, incomes, taxesByPlan, labels, colors) {
 
     lineChart.xAxis
       .axisLabel('Income')
-      .tickFormat(d3.format('$,.0f'))
-      .staggerLabels(true);
+      .showMaxMin(false)
+      .tickFormat(d3.format('$,.0f'));
 
     lineChart.yAxis
       .axisLabel('Income Tax')
+      .showMaxMin(false)
       .tickFormat(d3.format('$,.0f'));
 
     var data = [];

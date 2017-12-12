@@ -5,9 +5,9 @@ var plans = {
 };
 
 var colors = {
-  '2017': '#444',
+  '2017': '#555',
   '2018-house': '#4f4',
-  '2018-senate': '#0b0',
+  '2018-senate': '#0a0',
 };
 
 var rates = {
