@@ -217,25 +217,15 @@ var rates = {
   },
 };
 
-function calculateTax(values, attrs) {
+function calculateTax(values) {
   var rate = rates[values['plan']][values['status']];
-
-  attrs = attrs || {};
-  attrs['deduction'] = {'disabled': values['deduction-type'] === 'standard'};
-  attrs['dependents'] = {'min': values['status'] == 'joint' ? 2 : 1};
 
   // deduction
   if (values['deduction-type'] === 'standard') {
     values['deduction'] = rate['deduction'];
-    attrs['deduction'] = {'type': null, 'min': null, 'step': null, 'disabled': true};
-  } else {
-    attrs['deduction'] = {'type': 'number', 'min': 0, 'step': 1000, 'disabled': false};
   }
 
   // exemption
-  if (values['dependents'] < attrs['dependents']['min']) {
-    values['dependents'] = attrs['dependents']['min'];
-  }
   values['exemption'] = values['dependents'] * rate['exemption'];
 
   // taxable income

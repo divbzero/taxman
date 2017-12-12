@@ -1,3 +1,32 @@
+function adjustForm(form) {
+  // adjust deduction
+  var deduction = form.elements['deduction'];
+  var deductionType = form.elements['deduction-type'].value;
+  if (deductionType === 'standard') {
+    deduction.type = 'text';
+    deduction.min = '';
+    deduction.step = '';
+    deduction.disabled = true;
+  } else {
+    deduction.type = 'number';
+    deduction.min = '0';
+    deduction.step = '1000';
+    deduction.disabled = false;
+  }
+  // adjust dependents
+  var dependents = form.elements['dependents'];
+  var currentStatus = form.elements['status'].value;
+  var previousStatus = form.getAttribute('data-status');
+  if (currentStatus === 'joint' && previousStatus !== 'joint') {
+    dependents.min = 2;
+    dependents.value = Number(dependents.value) + 1;
+  } else if (currentStatus !== 'joint' && previousStatus === 'joint') {
+    dependents.min = 1;
+    dependents.value = Number(dependents.value) - 1;
+  }
+  form.setAttribute('data-status', currentStatus);
+}
+
 function parseForm(form) {
   var values = {};
   for (var element, i = 0; element = form.elements[i]; ++i) {
@@ -19,7 +48,7 @@ function parseForm(form) {
   return values;
 }
 
-function updateForm(form, values, attrs) {
+function updateForm(form, values) {
   for (var element, i = 0; element = form.elements[i]; ++i) {
     switch (element.tagName) {
       case 'INPUT':
@@ -37,22 +66,6 @@ function updateForm(form, values, attrs) {
           element.value = values[element.name];
           highlightElement(element, 200);
         }
-    }
-
-    var attributes = attrs && attrs[element.id] || {};
-    for (var name in attributes) {
-      switch (attributes[name]) {
-        case true:
-          element.setAttribute(name, '');
-          break;
-        case false:
-        case null:
-        case undefined:
-          element.removeAttribute(name);
-          break;
-        default:
-          element.setAttribute(name, attributes[name]);
-      }
     }
   }
 }
@@ -107,14 +120,15 @@ function highlightElement(element, delay) {
 }
 
 function rerender(form) {
-  var values = parseForm(form), attrs = {}, incomes = range(0, 410000, 10000), taxesByPlan = {};
-  calculateTax(values, attrs);
+  adjustForm(form);
+  var values = parseForm(form), incomes = range(0, 410000, 10000), taxesByPlan = {};
+  calculateTax(values);
   for (var plan in rates) {
     var valuesForPlan = Object.assign({}, values, {plan: plan});
     taxesByPlan[plan] = calculateTaxes(valuesForPlan, 'income', incomes);
   }
   formatValues(values);
-  updateForm(form, values, attrs);
+  updateForm(form, values);
   updateChart(chart, incomes, taxesByPlan, plans, colors);
 }
 
