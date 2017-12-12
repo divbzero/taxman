@@ -53,14 +53,14 @@ label {
   background-color: #ccc;
 }
 .toggle input:checked + label {
-  background-color: #6d6;
+  background-color: #66d;
   color: #fff;
 }
 .toggle input:checked + label:hover {
-  background-color: #4c4;
+  background-color: #44c;
 }
 .toggle input:checked + label:active {
-  background-color: #2b2;
+  background-color: #22b;
 }
 
 .input {
@@ -74,7 +74,7 @@ label {
 }
 .input:hover input,
 .input input.highlight {
-  background-color: #dfd;
+  background-color: #ddf;
   transition: background-color 0.2s ease-out;
 }
 .input label.unit {
