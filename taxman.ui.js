@@ -76,6 +76,7 @@ function updateChart(chart, incomes, taxesByPlan, labels, colors) {
     
     lineChart.margin({left: 80, right: 40});
     lineChart.useInteractiveGuideline(true);
+    lineChart.yDomain([0, 130000]);
 
     lineChart.xAxis
       .axisLabel('Income')
