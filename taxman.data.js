@@ -1,3 +1,15 @@
+var plans = {
+  '2017': '2017',
+  '2018-house': '2018 (House)',
+  '2018-senate': '2018 (Senate)',
+};
+
+var colors = {
+  '2017': '#444',
+  '2018-house': '#4f4',
+  '2018-senate': '#0b0',
+};
+
 var rates = {
   '2017': {
     single: {

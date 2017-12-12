@@ -57,6 +57,46 @@ function updateForm(form, values, attrs) {
   }
 }
 
+function updateChart(chart, incomes, taxesByPlan, labels, colors) {
+  nv.addGraph(function () {
+    var lineChart = nv.models.lineChart();
+    
+    lineChart.margin({left: 80, right: 40});
+    lineChart.useInteractiveGuideline(true);
+
+    lineChart.xAxis
+      .axisLabel('Income')
+      .tickFormat(d3.format('$,.0f'))
+      .staggerLabels(true);
+
+    lineChart.yAxis
+      .axisLabel('Income Tax')
+      .tickFormat(d3.format('$,.0f'));
+
+    var data = [];
+    for (var plan in labels) {
+      data.push({
+        values: taxesByPlan[plan].map(function (y, i) { return {x: incomes[i], y: y} }),
+        key: labels[plan],
+        color: colors[plan],
+      });
+    }
+
+    d3.select(chart)
+      .selectAll('svg')
+      .remove();
+
+    d3.select(chart)
+      .append('svg')
+      .datum(data)
+      .call(lineChart);
+
+    nv.utils.windowResize(lineChart.update);
+
+    return lineChart;
+  });
+}
+
 function highlightElement(element, delay) {
   var className = element.className;
   if (className.indexOf(' highlight') < 0) {
@@ -66,7 +106,7 @@ function highlightElement(element, delay) {
 }
 
 function rerender(form) {
-  var values = parseForm(form), attrs = {}, incomes = range(0, 400000, 10000), taxesByPlan = {};
+  var values = parseForm(form), attrs = {}, incomes = range(0, 410000, 10000), taxesByPlan = {};
   calculateTax(values, attrs);
   for (var plan in rates) {
     var valuesForPlan = Object.assign({}, values, {plan: plan});
@@ -74,8 +114,10 @@ function rerender(form) {
   }
   formatValues(values);
   updateForm(form, values, attrs);
+  updateChart(chart, incomes, taxesByPlan, plans, colors);
 }
 
 for (var form, i = 0; form = document.forms[i]; ++i) {
   form.onchange = form.oninput = function(event) { rerender(event.currentTarget) };
+  rerender(form);
 }
