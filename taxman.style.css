@@ -85,6 +85,7 @@ label {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   margin-right: -0.5em;
+  vertical-align: top;
   background-color: #eee;
 }
 .input input {
@@ -92,6 +93,7 @@ label {
   border: thin solid #ddd;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+  vertical-align: top;
   font-size: inherit;
 }
 .input input + label {
