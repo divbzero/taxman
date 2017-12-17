@@ -11,8 +11,9 @@ Inputs
 
 - [x] Tax regime
   - [x] 2017
-  - [x] 2018 (House)
-  - [x] 2018 (Senate)
+  - [x] 2018 (House Bill)
+  - [x] 2018 (Senate Bill)
+  - [x] 2018 (Final Bill)
 - [x] Filing status
   - [x] Joint, separate, single, head of household
   - [x] Number of dependents

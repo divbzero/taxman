@@ -1,13 +1,15 @@
 var plans = {
   '2017': '2017',
-  '2018-house': '2018 (House)',
-  '2018-senate': '2018 (Senate)',
+  '2018-house': '2018 (House Bill)',
+  '2018-senate': '2018 (Senate Bill)',
+  '2018-final': '2018 (Final Bill)',
 };
 
 var colors = {
   '2017': '#555',
-  '2018-house': '#44f',
-  '2018-senate': '#00a',
+  '2018-house': '#88f',
+  '2018-senate': '#77e',
+  '2018-final': '#00a',
 };
 
 var rates = {
@@ -212,6 +214,60 @@ var rates = {
         {min: 160000, max:   200000, rate: 0.32},
         {min: 200000, max:   500000, rate: 0.35},
         {min: 500000, max: Infinity, rate: 0.385},
+      ],
+    },
+  },
+  '2018-final': {
+    single: {
+      deduction: 12000,
+      exemption: 0,
+      income: [
+        {min:      0, max:     9525, rate: 0.10},
+        {min:   9525, max:    38700, rate: 0.12},
+        {min:  38700, max:    82500, rate: 0.22},
+        {min:  82500, max:   157500, rate: 0.24},
+        {min: 157500, max:   200000, rate: 0.32},
+        {min: 200000, max:   500000, rate: 0.35},
+        {min: 500000, max: Infinity, rate: 0.37},
+      ],
+    },
+    joint: {
+      deduction: 24000,
+      exemption: 0,
+      income: [
+        {min:      0, max:    19050, rate: 0.10},
+        {min:  19050, max:    77400, rate: 0.12},
+        {min:  77400, max:   165000, rate: 0.22},
+        {min: 165000, max:   315000, rate: 0.24},
+        {min: 315000, max:   400000, rate: 0.32},
+        {min: 400000, max:   600000, rate: 0.35},
+        {min: 600000, max: Infinity, rate: 0.37},
+      ],
+    },
+    separate: {
+      deduction: 12000,
+      exemption: 0,
+      income: [
+        {min:      0, max:     9525, rate: 0.10},
+        {min:   9525, max:    38700, rate: 0.12},
+        {min:  38700, max:    82500, rate: 0.22},
+        {min:  82500, max:   157500, rate: 0.24},
+        {min: 157500, max:   200000, rate: 0.32},
+        {min: 200000, max:   500000, rate: 0.35},
+        {min: 500000, max: Infinity, rate: 0.37},
+      ],
+    },
+    household: {
+      deduction: 18000,
+      exemption: 0,
+      income: [
+        {min:      0, max:    13600, rate: 0.10},
+        {min:  13600, max:    51800, rate: 0.12},
+        {min:  51800, max:    82500, rate: 0.22},
+        {min:  82500, max:   157500, rate: 0.24},
+        {min: 157500, max:   200000, rate: 0.32},
+        {min: 200000, max:   500000, rate: 0.35},
+        {min: 500000, max: Infinity, rate: 0.37},
       ],
     },
   },
