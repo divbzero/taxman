@@ -101,6 +101,16 @@ label {
   font-size: 84%;
 }
 
+header h1 {
+  margin-bottom: 0;
+  font-weight: 600;
+  color; #222;
+}
+header h2 {
+  margin-top: 0;
+  font-weight: 300;
+}
+
 #chart svg {
   height: 600px;
 }
