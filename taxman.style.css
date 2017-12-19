@@ -36,6 +36,12 @@ label {
   font-family: "Gill Sans", "Gill Sans MT", "Helvetica Neue", "Segoe UI", Calibri, sans-serif;
   font-weight: 200;
 }
+input[type="number"],
+input[type="text"] {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
 
 .toggle {
   display: inline-block;
