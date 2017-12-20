@@ -16,6 +16,7 @@ section {
 }
 
 fieldset {
+  display: inline-block;
   border: 0;
   margin: 1em 0;
 }
@@ -41,6 +42,9 @@ input[type="text"] {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
+}
+input[type="number"] {
+  padding-right: 0.2em;
 }
 
 .toggle {
@@ -88,17 +92,24 @@ input[type="text"] {
 }
 .input label.unit {
   border: thin solid #ddd;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  margin-right: -0.5em;
   vertical-align: top;
   background-color: #eee;
 }
+.input.prefix label.unit,
+.input.suffix input {
+  border-radius: 0.2em 0 0 0.2em;
+  margin-right: -0.2em;
+}
+.input.prefix input,
+.input.suffix label.unit {
+  border-radius: 0 0.2em 0.2em 0;
+  margin-left: -0.2em;
+}
+.input.suffix input {
+  text-align: right;
+}
 .input input {
-  padding-right: 0.2em;
   border: thin solid #ddd;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
   vertical-align: top;
   font-size: inherit;
 }
@@ -107,6 +118,12 @@ input[type="text"] {
   padding: 0.3em;
   color: #555;
   font-size: 84%;
+}
+.input input + label.unit {
+  display: inline-block;
+  padding: 0.5em 0.8em;
+  color: inherit;
+  font-size: inherit;
 }
 
 header h1 {
