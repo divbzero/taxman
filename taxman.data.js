@@ -292,15 +292,23 @@ function calculateTax(values) {
 
   // tax
   values['tax'] = 0;
+  values['marginal-tax-rate'] = 0;
   for (var bracket, i = 0; bracket = rate['income'][i]; ++i) {
     if (values['taxable-income'] > bracket.max) {
       values['tax'] += (bracket.max - bracket.min) * bracket.rate;
+      values['marginal-tax-rate'] = bracket.rate;
     } else {
       values['tax'] += (values['taxable-income'] - bracket.min) * bracket.rate;
+      values['marginal-tax-rate'] = bracket.rate;
       break;
     }
   }
+  values['overall-tax-rate'] = values['tax'] / values['income'];
+
+  // preformat
   values['tax'] = Math.round(values['tax']);
+  values['marginal-tax-rate'] = (100 * values['marginal-tax-rate']).toFixed(1);
+  values['overall-tax-rate'] = (100 * values['overall-tax-rate']).toFixed(1);
 }
 
 function calculateTaxes(values, propname, propvalues) {
