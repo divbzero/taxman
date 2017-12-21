@@ -137,3 +137,8 @@ for (var form, i = 0; form = document.forms[i]; ++i) {
   form.onchange = form.oninput = function(event) { rerender(event.currentTarget) };
   rerender(form);
 }
+
+window.onscroll = function () {
+  var tooltips = document.getElementsByClassName('nvtooltip');
+  for (var tooltip, i = 0; tooltip = tooltips[i]; ++i) tooltip.style.opacity = 0;
+};
