@@ -37,11 +37,14 @@ label {
   font-family: "Gill Sans", "Gill Sans MT", "Helvetica Neue", "Segoe UI", Calibri, sans-serif;
   font-weight: 200;
 }
-input[type="number"],
-input[type="text"] {
+input {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
+}
+input:disabled {
+  opacity: 1;
+  cursor: not-allowed;
 }
 input[type="number"] {
   padding-right: 0.2em;
